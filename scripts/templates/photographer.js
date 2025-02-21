@@ -5,12 +5,16 @@ function photographerTemplate(photographerData) {
 
   function getUserCardDOM() {
     const article = document.createElement("article");
-    const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    const h2 = document.createElement("h2");
-    h2.textContent = name;
-    article.appendChild(img);
-    article.appendChild(h2);
+
+    article.innerHTML = `
+    <a href="/photographer?id=${id}">
+        <img src="${picture}" alt=""/>
+        <h2>${name}</h2>
+    </a>
+    <p class="photographer_location">${city}, ${country}</p>
+    <p class="photographer_tagline">${tagline}</p>
+    <p class="photographer_price">${price}€/jour</p>
+    `;
     return article;
   }
   return { name, id, city, country, tagline, price, picture, getUserCardDOM };
