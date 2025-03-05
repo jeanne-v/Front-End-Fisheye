@@ -1,9 +1,29 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+function showContactModal() {
+  const mainWrapper = document.getElementById("main-wrapper");
+  const contactModal = document.getElementById("contact_modal");
+  contactModal.ariaHidden = false;
+  contactModal.style.display = "flex";
+  document.querySelector(".modal_close-button").focus();
+  mainWrapper.ariaHidden = true;
+  mainWrapper.inert = true;
+  mainWrapper.classList.add("no-scroll");
 }
 
-function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+function hideContactModal() {
+  const mainWrapper = document.getElementById("main-wrapper");
+  const contactModal = document.getElementById("contact_modal");
+  contactModal.style.display = "none";
+  contactModal.ariaHidden = true;
+  mainWrapper.ariaHidden = false;
+  mainWrapper.inert = false;
+  mainWrapper.classList.remove("no-scroll");
+}
+
+function logFormData() {
+  const modalForm = document.getElementById("modal-form");
+  const formData = new FormData(modalForm);
+  console.log(formData.get("first-name"));
+  console.log(formData.get("last-name"));
+  console.log(formData.get("email"));
+  console.log(formData.get("message"));
 }

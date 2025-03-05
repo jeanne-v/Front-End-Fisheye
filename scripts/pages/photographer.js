@@ -5,6 +5,8 @@ function displayData(photographer, media) {
   const userCardDOM = photographerModel.getLongUserCardDOM();
   photographersHeader.appendChild(userCardDOM);
 
+  document.getElementById("modal-title").textContent += ` ${photographer.name}`;
+
   const mediaContainer = document.querySelector(".media-container");
   media.forEach((mediaEl) => {
     const mediaModel = mediaFactory(mediaEl);
@@ -31,6 +33,23 @@ async function init() {
   const media = await getPhotographerMedia(photographerId);
 
   displayData(photographer, media);
+
+  document.querySelector(".contact_button").addEventListener("click", showContactModal);
+  document
+    .querySelector(".modal_close-button")
+    .addEventListener("click", hideContactModal);
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      document.querySelector("#contact_modal").ariaHidden === "false"
+    ) {
+      hideContactModal();
+    }
+  });
+  document.querySelector("#modal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    logFormData();
+  });
 }
 
 init();
