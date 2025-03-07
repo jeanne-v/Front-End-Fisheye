@@ -33,9 +33,19 @@ function photographerTemplate(photographerData) {
     </div>
     <button class="contact_button">Contactez-moi</button>
     <img class="photographer_img" src="${picture}" alt=""/>
-    <div class="photographer_fixed-details"><p class="photographer_price">${priceStr}</p></div>
+    <div class="photographer_fixed-details">
+      <div class="photographer_likes">
+      <p class="photographer_likes-number"></p>
+      <img src="./assets/icons/like-black.svg" class="photographer_likes-icon" alt="likes" />
+      </div>
+      <p class="photographer_price">${priceStr}</p>
+    </div>
     `;
     return container;
+  }
+
+  function renderPhotographerLikes(likesNumber) {
+    document.querySelector(".photographer_likes-number").textContent = likesNumber;
   }
 
   return {
@@ -47,5 +57,6 @@ function photographerTemplate(photographerData) {
     picture,
     getShortUserCardDOM,
     getLongUserCardDOM,
+    renderPhotographerLikes,
   };
 }

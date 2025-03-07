@@ -9,6 +9,7 @@
   box-sizing: border-box;
   background-color: #c4c4c466;
   overflow-y: scroll;
+  z-index: 100;
 }
 
 .modal {

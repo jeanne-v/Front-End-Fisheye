@@ -24,6 +24,10 @@ h1 {
   margin-left: 100px;
 }
 
+main {
+  margin-bottom: 40px;
+}
+
 /* PHOTOGRAPHERS */
 
 .photographer_section {
@@ -127,6 +131,12 @@ h1 {
   font-size: 9px;
 }
 
+.photographer_fixed-details,
+.photographer_likes {
+  display: flex;
+  align-items: center;
+}
+
 .photographer_fixed-details {
   background-color: #db8876;
   position: fixed;
@@ -136,6 +146,14 @@ h1 {
   padding: 18px 32px;
   font-weight: 500;
   border-radius: 5px 5px;
+  z-index: 1;
+  gap: 46px;
+  justify-content: space-between;
+  min-width: 275px;
+}
+
+.photographer_likes {
+  gap: 4px;
 }
 
 .contact_button {

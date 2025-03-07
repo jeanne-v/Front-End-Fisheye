@@ -1,7 +1,9 @@
 function mediaFactory(mediaData) {
-  const { id, photographerId, title, video, image, likes, date, price } = mediaData;
+  let { id, photographerId, title, video, image, likes, date, price } = mediaData;
   let el;
   let fullEl;
+  let isLiked = false;
+  let likesNumberHTMLEl;
 
   if (image) {
     el = getImageEl(mediaData);
@@ -36,6 +38,24 @@ function mediaFactory(mediaData) {
     titleEl.textContent = title;
     detailsContainer.appendChild(titleEl);
 
+    const likesDiv = document.createElement("div");
+    const likesNumber = document.createElement("p");
+    likesNumber.textContent = likes;
+    likesNumber.classList.add("media-item_likes-number");
+    likesDiv.appendChild(likesNumber);
+    likesNumberHTMLEl = likesNumber;
+
+    const likeIcon = document.createElement("img");
+    likeIcon.src = "./assets/icons/like-red.svg";
+    likeIcon.alt = "likes";
+
+    const likeBtn = document.createElement("button");
+    likeBtn.classList.add("media-item_like-btn");
+    likeBtn.appendChild(likeIcon);
+    likesDiv.appendChild(likeBtn);
+
+    detailsContainer.appendChild(likesDiv);
+
     // article.appendChild(link);
     article.appendChild(button);
     article.appendChild(detailsContainer);
@@ -53,16 +73,28 @@ function mediaFactory(mediaData) {
     return div;
   }
 
+  function handleLike() {
+    if (isLiked) {
+      likes--;
+    } else {
+      likes++;
+    }
+    isLiked = !isLiked;
+    likesNumberHTMLEl.textContent = likes;
+  }
+
   return {
     id,
     photographerId,
     title,
-    el,
+    video,
+    image,
     likes,
     date,
     price,
     getMediaCardDOM,
     getFullMediaDOM,
+    handleLike,
   };
 }
 

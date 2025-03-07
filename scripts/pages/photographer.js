@@ -12,7 +12,29 @@ function displayData(photographer, media) {
     const mediaModel = mediaFactory(mediaEl);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
     mediaContainer.appendChild(mediaCardDOM);
+    mediaCardDOM.addEventListener("click", (e) => {
+      if (
+        e.target.classList.contains("media-item_like-btn") ||
+        e.target.parentElement.classList.contains("media-item_like-btn")
+      ) {
+        mediaModel.handleLike();
+        displayTotalLikes();
+      }
+    });
   });
+
+  function displayTotalLikes() {
+    const likesNumberHTMLEls = Array.from(
+      document.querySelectorAll(".media-item_likes-number")
+    );
+    const totalLikesNumber = likesNumberHTMLEls.reduce((total, current) => {
+      return total + Number(current.textContent);
+    }, 0);
+
+    photographerModel.renderPhotographerLikes(totalLikesNumber);
+  }
+
+  displayTotalLikes();
 }
 
 async function getPhotographerMedia(photographerId) {
