@@ -38,17 +38,51 @@ async function init() {
   document
     .querySelector(".modal_close-button")
     .addEventListener("click", hideContactModal);
+  document.querySelector("#modal-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    logFormData();
+  });
+
+  const openLightBoxBtns = Array.from(document.querySelectorAll(".media-item_open-btn"));
+  openLightBoxBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mediaId = Number(btn.dataset.mediaId);
+      const currentMedia = media.find((mediaEl) => mediaEl.id === mediaId);
+      showLightbox(currentMedia);
+    });
+  });
+
+  document.querySelector(".lightbox_close-btn").addEventListener("click", hideLightbox);
+
+  document.querySelector(".lightbox_arrow-btn--left").addEventListener("click", () => {
+    navigateLightbox(media, "previous");
+  });
+  document.querySelector(".lightbox_arrow-btn--right").addEventListener("click", () => {
+    navigateLightbox(media, "next");
+  });
+
   document.addEventListener("keydown", (e) => {
     if (
       e.key === "Escape" &&
       document.querySelector("#contact_modal").ariaHidden === "false"
     ) {
       hideContactModal();
+    } else if (
+      e.key === "Escape" &&
+      document.querySelector("#lightbox-container").ariaHidden === "false"
+    ) {
+      hideLightbox();
+    } else if (
+      e.key === "ArrowLeft" &&
+      document.querySelector("#lightbox-container").ariaHidden === "false"
+    ) {
+      navigateLightbox(media, "previous");
+    } else if (
+      e.key === "ArrowRight" &&
+      document.querySelector("#lightbox-container").ariaHidden === "false"
+    ) {
+      navigateLightbox(media, "next");
     }
-  });
-  document.querySelector("#modal-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    logFormData();
   });
 }
 

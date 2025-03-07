@@ -150,3 +150,8 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
 }
+
+#main-wrapper.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}

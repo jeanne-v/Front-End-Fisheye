@@ -24,7 +24,7 @@
     </div>
     <div
       id="contact_modal"
-      aria-hidden="false"
+      aria-hidden="true"
       role="dialog"
       aria-labelledby="modal-title"
     >
@@ -32,7 +32,7 @@
         <header>
           <h2 id="modal-title">Contactez-moi</h2>
           <button class="modal_close-button">
-            <img src="assets/icons/close.svg" alt="fermer la modale" />
+            <img src="assets/icons/close-white.svg" alt="fermer la modale" />
           </button>
         </header>
         <form id="modal-form">
@@ -56,9 +56,31 @@
         </form>
       </div>
     </div>
+    <div
+      id="lightbox-container"
+      class="lightbox-container"
+      aria-hidden="true"
+      role="dialog"
+    >
+      <div class="lightbox">
+        <button class="lightbox_arrow-btn lightbox_arrow-btn--left">
+          <img src="assets/icons/left-arrow.svg" alt="image précédente" />
+        </button>
+
+        <div class="lightbox_media-container"></div>
+
+        <button class="lightbox_close-btn">
+          <img src="assets/icons/close-red.svg" alt="fermer la modale" />
+        </button>
+        <button class="lightbox_arrow-btn lightbox_arrow-btn--right">
+          <img src="assets/icons/right-arrow.svg" alt="image suivante" />
+        </button>
+      </div>
+    </div>
     <script src="scripts/utils/getPhotographers.js"></script>
     <script src="scripts/templates/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>

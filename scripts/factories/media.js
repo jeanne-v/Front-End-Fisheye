@@ -1,20 +1,32 @@
 function mediaFactory(mediaData) {
   const { id, photographerId, title, video, image, likes, date, price } = mediaData;
   let el;
+  let fullEl;
 
   if (image) {
     el = getImageEl(mediaData);
+    fullEl = el.cloneNode(true);
   } else if (video) {
     el = getVideoEl(mediaData);
+    fullEl = el.cloneNode(true);
+    fullEl.controls = true;
   }
 
   function getMediaCardDOM() {
     const article = document.createElement("article");
     article.classList.add("media-item");
 
-    const link = document.createElement("a");
-    link.href = "";
-    link.appendChild(el);
+    // const link = document.createElement("a");
+    // link.href = "";
+    // link.appendChild(el);
+    const button = document.createElement("button");
+    button.dataset.mediaId = id;
+    button.classList.add("media-item_open-btn");
+
+    const container = document.createElement("div");
+    container.classList.add("media-item_preview-container");
+    container.appendChild(el);
+    button.appendChild(container);
 
     const detailsContainer = document.createElement("div");
     detailsContainer.classList.add("media-items_details");
@@ -24,12 +36,34 @@ function mediaFactory(mediaData) {
     titleEl.textContent = title;
     detailsContainer.appendChild(titleEl);
 
-    article.appendChild(link);
+    // article.appendChild(link);
+    article.appendChild(button);
     article.appendChild(detailsContainer);
     return article;
   }
 
-  return { id, photographerId, title, el, likes, date, price, getMediaCardDOM };
+  function getFullMediaDOM() {
+    const div = document.createElement("div");
+    fullEl.dataset.mediaId = id;
+    div.appendChild(fullEl);
+
+    const caption = document.createElement("p");
+    caption.textContent = title;
+    div.appendChild(caption);
+    return div;
+  }
+
+  return {
+    id,
+    photographerId,
+    title,
+    el,
+    likes,
+    date,
+    price,
+    getMediaCardDOM,
+    getFullMediaDOM,
+  };
 }
 
 function getImageEl(mediaData) {
