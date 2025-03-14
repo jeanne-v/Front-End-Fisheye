@@ -1,5 +1,9 @@
-.media-container {
+.photographer-media {
   margin: 0 100px;
+}
+
+.media-container {
+  margin-top: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 95px;

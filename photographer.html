@@ -19,9 +19,20 @@
       </header>
       <main id="main">
         <div class="photographer-header"></div>
-        <div class="media-container"></div>
+        <div class="photographer-media">
+          <div class="photographer-media_filter">
+            <label for="media-sort-select">Trier par</label>
+            <select id="media-sort-select" name="media-sort">
+              <option value="popularity">Popularité</option>
+              <option value="date">Date</option>
+              <option value="title">Titre</option>
+            </select>
+          </div>
+          <div class="media-container"></div>
+        </div>
       </main>
     </div>
+
     <div
       id="contact_modal"
       aria-hidden="true"
@@ -56,6 +67,7 @@
         </form>
       </div>
     </div>
+
     <div
       id="lightbox-container"
       class="lightbox-container"

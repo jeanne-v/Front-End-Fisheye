@@ -1,9 +1,8 @@
 function mediaFactory(mediaData) {
-  let { id, photographerId, title, video, image, likes, date, price } = mediaData;
+  let { id, photographerId, title, video, image, likes, isLiked, date, price } =
+    mediaData;
   let el;
   let fullEl;
-  let isLiked = false;
-  let likesNumberHTMLEl;
 
   if (image) {
     el = getImageEl(mediaData);
@@ -17,12 +16,12 @@ function mediaFactory(mediaData) {
   function getMediaCardDOM() {
     const article = document.createElement("article");
     article.classList.add("media-item");
+    article.dataset.mediaId = id;
 
     // const link = document.createElement("a");
     // link.href = "";
     // link.appendChild(el);
     const button = document.createElement("button");
-    button.dataset.mediaId = id;
     button.classList.add("media-item_open-btn");
 
     const container = document.createElement("div");
@@ -43,7 +42,6 @@ function mediaFactory(mediaData) {
     likesNumber.textContent = likes;
     likesNumber.classList.add("media-item_likes-number");
     likesDiv.appendChild(likesNumber);
-    likesNumberHTMLEl = likesNumber;
 
     const likeIcon = document.createElement("img");
     likeIcon.src = "./assets/icons/like-red.svg";
@@ -73,16 +71,6 @@ function mediaFactory(mediaData) {
     return div;
   }
 
-  function handleLike() {
-    if (isLiked) {
-      likes--;
-    } else {
-      likes++;
-    }
-    isLiked = !isLiked;
-    likesNumberHTMLEl.textContent = likes;
-  }
-
   return {
     id,
     photographerId,
@@ -90,11 +78,11 @@ function mediaFactory(mediaData) {
     video,
     image,
     likes,
+    isLiked,
     date,
     price,
     getMediaCardDOM,
     getFullMediaDOM,
-    handleLike,
   };
 }
 

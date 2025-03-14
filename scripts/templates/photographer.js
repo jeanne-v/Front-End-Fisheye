@@ -1,6 +1,6 @@
-function photographerTemplate(photographerData) {
+function photographerTemplate(photographerData, photographerTotalLikes) {
   const { name, id, city, country, tagline, price, portrait } = photographerData;
-
+  const likes = photographerTotalLikes;
   const picture = `assets/photographers/${portrait}`;
   const location = `${city}, ${country}`;
   const priceStr = `${price}€/jour`;
@@ -35,17 +35,13 @@ function photographerTemplate(photographerData) {
     <img class="photographer_img" src="${picture}" alt=""/>
     <div class="photographer_fixed-details">
       <div class="photographer_likes">
-      <p class="photographer_likes-number"></p>
+      <p class="photographer_likes-number">${likes}</p>
       <img src="./assets/icons/like-black.svg" class="photographer_likes-icon" alt="likes" />
       </div>
       <p class="photographer_price">${priceStr}</p>
     </div>
     `;
     return container;
-  }
-
-  function renderPhotographerLikes(likesNumber) {
-    document.querySelector(".photographer_likes-number").textContent = likesNumber;
   }
 
   return {
@@ -57,6 +53,5 @@ function photographerTemplate(photographerData) {
     picture,
     getShortUserCardDOM,
     getLongUserCardDOM,
-    renderPhotographerLikes,
   };
 }
