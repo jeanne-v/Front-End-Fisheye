@@ -12,11 +12,12 @@ function showContactModal() {
 function hideContactModal() {
   const mainWrapper = document.getElementById("main-wrapper");
   const contactModal = document.getElementById("contact_modal");
-  contactModal.style.display = "none";
-  contactModal.ariaHidden = true;
   mainWrapper.ariaHidden = false;
   mainWrapper.inert = false;
   mainWrapper.classList.remove("no-scroll");
+  document.querySelector(".contact_button").focus();
+  contactModal.style.display = "none";
+  contactModal.ariaHidden = true;
 }
 
 function logFormData() {

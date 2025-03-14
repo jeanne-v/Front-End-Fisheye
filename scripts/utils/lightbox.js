@@ -1,8 +1,6 @@
 function showLightbox(media) {
   const mainWrapper = document.getElementById("main-wrapper");
   const lightboxContainer = document.getElementById("lightbox-container");
-  const mediaModel = mediaFactory(media);
-  const fullMediaDOM = mediaModel.getFullMediaDOM();
   displayLightBoxMedia(media);
 
   lightboxContainer.style.display = "flex";
@@ -25,11 +23,19 @@ function displayLightBoxMedia(media) {
 function hideLightbox() {
   const mainWrapper = document.getElementById("main-wrapper");
   const lightboxContainer = document.getElementById("lightbox-container");
-  lightboxContainer.style.display = "none";
-  lightboxContainer.ariaHidden = true;
+
+  const currentMediaElId =
+    lightboxContainer.querySelector(".media-item_media").dataset.mediaId;
+
   mainWrapper.ariaHidden = false;
   mainWrapper.inert = false;
   mainWrapper.classList.remove("no-scroll");
+  document
+    .querySelector(`article[data-media-id="${currentMediaElId}"] .media-item_open-btn`)
+    .focus();
+
+  lightboxContainer.style.display = "none";
+  lightboxContainer.ariaHidden = true;
 }
 
 function navigateLightbox(mediaArray, direction) {
