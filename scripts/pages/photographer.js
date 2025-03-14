@@ -47,7 +47,8 @@ function updateLikes(mediaArray, targetmediaItem) {
   ).textContent = targetmediaItem.likes;
 }
 
-function sortMediaArray(mediaArray, sortBy) {
+function sortMediaArray(mediaArray) {
+  const sortBy = document.getElementById("media-sort-trigger").dataset.selectedSortValue;
   if (sortBy === "popularity") {
     mediaArray.sort((a, b) => {
       return b.likes - a.likes;
@@ -86,8 +87,13 @@ async function init() {
   const photographerTotalLikes = getPhotographerTotalLikes(mediaArray);
 
   displayPhotographer(photographer, photographerTotalLikes);
-  sortMediaArray(mediaArray, "popularity");
+  sortMediaArray(mediaArray);
   displayMedia(mediaArray);
+
+  function handleMediaSortValueChange() {
+    sortMediaArray(mediaArray);
+    displayMedia(mediaArray);
+  }
 
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("contact_button")) {
@@ -108,6 +114,22 @@ async function init() {
       const mediaId = Number(e.target.closest(".media-item").dataset.mediaId);
       const mediaItem = mediaArray.find((arrItem) => arrItem.id === mediaId);
       updateLikes(mediaArray, mediaItem);
+    } else if (e.target.closest("#media-sort-trigger")) {
+      if (document.querySelector("#media-sort-trigger").ariaExpanded === "false") {
+        openDropDown();
+      } else if (document.querySelector("#media-sort-trigger").ariaExpanded === "true") {
+        closeDropDown();
+      }
+    } else if (
+      (document.getElementById("media-sort-trigger").ariaExpanded =
+        "true" && !document.querySelector(".media-sort").contains(e.target))
+    ) {
+      closeDropDown();
+    } else if (e.target.classList.contains("media-sort__option")) {
+      moveFocusToOption(e.target);
+      updateSelectedValue();
+      closeDropDown();
+      handleMediaSortValueChange();
     }
   });
 
@@ -116,33 +138,49 @@ async function init() {
     logFormData();
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (
-      e.key === "Escape" &&
-      document.querySelector("#contact_modal").ariaHidden === "false"
-    ) {
-      hideContactModal();
-    } else if (
-      e.key === "Escape" &&
-      document.querySelector("#lightbox-container").ariaHidden === "false"
-    ) {
+  document.querySelector("#lightbox-container").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       hideLightbox();
-    } else if (
-      e.key === "ArrowLeft" &&
-      document.querySelector("#lightbox-container").ariaHidden === "false"
-    ) {
+    } else if (e.key === "ArrowLeft") {
       navigateLightbox(mediaArray, "previous");
-    } else if (
-      e.key === "ArrowRight" &&
-      document.querySelector("#lightbox-container").ariaHidden === "false"
-    ) {
+    } else if (e.key === "ArrowRight") {
       navigateLightbox(mediaArray, "next");
     }
   });
 
-  document.getElementById("media-sort-select").addEventListener("change", (e) => {
-    sortMediaArray(mediaArray, e.target.value);
-    displayMedia(mediaArray);
+  document.querySelector("#contact_modal").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideContactModal();
+    }
+  });
+
+  document.querySelector(".media-sort").addEventListener("keydown", (e) => {
+    const isDropDownOpen = Boolean(
+      document.getElementById("media-sort-trigger").ariaExpanded === "true"
+    );
+    if (isDropDownOpen && e.key === "Escape") {
+      closeDropDown();
+    } else if (!isDropDownOpen && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
+      e.preventDefault();
+      openDropDown();
+    } else if (isDropDownOpen && e.key === "ArrowUp") {
+      e.preventDefault();
+      moveDropDownFocusToPreviousOption();
+    } else if (isDropDownOpen && e.key === "ArrowDown") {
+      e.preventDefault();
+      moveDropDownFocusToNextOption();
+    } else if (isDropDownOpen && (e.key === "Enter" || "Space")) {
+      e.preventDefault();
+      updateSelectedValue();
+      closeDropDown();
+      handleMediaSortValueChange();
+    }
+  });
+
+  document.querySelectorAll(".media-sort__option").forEach((optionHTMLEL) => {
+    optionHTMLEL.addEventListener("mouseenter", (e) => {
+      moveFocusToOption(e.target);
+    });
   });
 }
 
