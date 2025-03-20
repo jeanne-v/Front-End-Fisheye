@@ -1,16 +1,16 @@
 function mediaFactory(mediaData) {
   let { id, photographerId, title, video, image, likes, isLiked, date, price } =
     mediaData;
-  let el;
-  let fullEl;
+  let imageOrVideoPreviewCardHTMLEl;
+  let imageOrVideoPlayerLightboxHTMLEl;
 
   if (image) {
-    el = getImageEl(mediaData);
-    fullEl = el.cloneNode(true);
+    imageOrVideoPreviewCardHTMLEl = getImageHTMLEl(mediaData);
+    imageOrVideoPlayerLightboxHTMLEl = imageOrVideoPreviewCardHTMLEl.cloneNode(true);
   } else if (video) {
-    el = getVideoEl(mediaData);
-    fullEl = el.cloneNode(true);
-    fullEl.controls = true;
+    imageOrVideoPreviewCardHTMLEl = getVideoHTMLEl(mediaData);
+    imageOrVideoPlayerLightboxHTMLEl = imageOrVideoPreviewCardHTMLEl.cloneNode(true);
+    imageOrVideoPlayerLightboxHTMLEl.controls = true;
   }
 
   function getMediaCardDOM() {
@@ -26,7 +26,7 @@ function mediaFactory(mediaData) {
 
     const container = document.createElement("div");
     container.classList.add("media-item_preview-container");
-    container.appendChild(el);
+    container.appendChild(imageOrVideoPreviewCardHTMLEl);
     button.appendChild(container);
 
     const detailsContainer = document.createElement("div");
@@ -34,8 +34,14 @@ function mediaFactory(mediaData) {
 
     const titleEl = document.createElement("p");
     titleEl.classList.add("media-item_title");
+    titleEl.id = `media-item-title-${id}`;
     titleEl.textContent = title;
     detailsContainer.appendChild(titleEl);
+
+    imageOrVideoPreviewCardHTMLEl.setAttribute(
+      "aria-labelledby",
+      `media-item-title-${id}`
+    );
 
     const likesDiv = document.createElement("div");
     const likesNumber = document.createElement("p");
@@ -60,13 +66,19 @@ function mediaFactory(mediaData) {
     return article;
   }
 
-  function getFullMediaDOM() {
+  function getLightboxMediaDOM() {
     const div = document.createElement("div");
-    fullEl.dataset.mediaId = id;
-    div.appendChild(fullEl);
+    imageOrVideoPlayerLightboxHTMLEl.dataset.mediaId = id;
+    div.appendChild(imageOrVideoPlayerLightboxHTMLEl);
+
+    imageOrVideoPlayerLightboxHTMLEl.setAttribute(
+      "aria-labelledby",
+      `lightbox-caption-${id}`
+    );
 
     const caption = document.createElement("p");
     caption.textContent = title;
+    caption.id = `lightbox-caption-${id}`;
     div.appendChild(caption);
     return div;
   }
@@ -82,18 +94,18 @@ function mediaFactory(mediaData) {
     date,
     price,
     getMediaCardDOM,
-    getFullMediaDOM,
+    getLightboxMediaDOM,
   };
 }
 
-function getImageEl(mediaData) {
+function getImageHTMLEl(mediaData) {
   const el = document.createElement("img");
   el.classList.add("media-item_media", "media-item_media--image");
   el.src = `./assets/images/${mediaData.image}`;
   return el;
 }
 
-function getVideoEl(mediaData) {
+function getVideoHTMLEl(mediaData) {
   const el = document.createElement("video");
   el.classList.add("media-item_media", "media-item_media--video");
   el.src = `./assets/images/${mediaData.video}`;

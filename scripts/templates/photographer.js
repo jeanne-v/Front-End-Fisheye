@@ -5,9 +5,10 @@ function photographerTemplate(photographerData, photographerTotalLikes) {
   const location = `${city}, ${country}`;
   const priceStr = `${price}€/jour`;
 
-  function getShortUserCardDOM() {
+  // version carte page d'accueil
+  function getPhotographerCardDOM() {
     const article = document.createElement("article");
-    article.classList.add("photographer", "photographer--short");
+    article.classList.add("photographer", "photographer--card");
 
     article.innerHTML = `
     <a href="/photographer.html?id=${id}">
@@ -21,9 +22,10 @@ function photographerTemplate(photographerData, photographerTotalLikes) {
     return article;
   }
 
-  function getLongUserCardDOM() {
+  // version page photographe dédiée
+  function getPhotographerDetailsDOM() {
     const container = document.createElement("div");
-    container.classList.add("photographer", "photographer--long");
+    container.classList.add("photographer", "photographer--details");
 
     container.innerHTML = `
     <div>
@@ -51,7 +53,7 @@ function photographerTemplate(photographerData, photographerTotalLikes) {
     tagline,
     priceStr,
     picture,
-    getShortUserCardDOM,
-    getLongUserCardDOM,
+    getPhotographerCardDOM,
+    getPhotographerDetailsDOM,
   };
 }

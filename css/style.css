@@ -37,7 +37,7 @@ main {
   margin-top: 100px;
 }
 
-.photographer--short {
+.photographer--card {
   justify-self: center;
   display: flex;
   justify-content: center;
@@ -45,12 +45,12 @@ main {
   flex-direction: column;
 }
 
-.photographer--short a {
+.photographer--card a {
   text-decoration: none;
   text-align: center;
 }
 
-.photographer--short a:hover {
+.photographer--card a:hover {
   text-decoration: underline;
   text-decoration-color: #d3573c;
 }
@@ -64,7 +64,7 @@ main {
   margin: 0 100px;
 }
 
-.photographer--long {
+.photographer--details {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,12 +75,12 @@ main {
   color: #d3573c;
 }
 
-.photographer--short .photographer_name {
+.photographer--card .photographer_name {
   font-size: 36px;
   margin: 20px 0 0;
 }
 
-.photographer--long .photographer_name {
+.photographer--details .photographer_name {
   font-size: 64px;
   margin: 0;
 }
@@ -96,11 +96,11 @@ main {
   margin-top: 0;
 }
 
-.photographer--short p:not(:last-of-type) {
+.photographer--card p:not(:last-of-type) {
   margin-bottom: 3px;
 }
 
-.photographer--long p {
+.photographer--details p {
   margin-bottom: 0;
 }
 
@@ -108,25 +108,25 @@ main {
   color: #901c1c;
 }
 
-.photographer--short .photographer_location {
+.photographer--card .photographer_location {
   font-size: 13px;
 }
 
-.photographer--long .photographer_location {
+.photographer--details .photographer_location {
   font-size: 24px;
   margin-bottom: 19px;
 }
 
-.photographer--short .photographer_tagline {
+.photographer--card .photographer_tagline {
   font-size: 10px;
 }
 
-.photographer--long .photographer_tagline {
+.photographer--details .photographer_tagline {
   font-size: 18px;
   margin-bottom: 0;
 }
 
-.photographer--short .photographer_price {
+.photographer--card .photographer_price {
   color: #757575;
   font-size: 9px;
 }

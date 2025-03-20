@@ -21,8 +21,8 @@ function displayPhotographer(photographer, photographerTotalLikes) {
   const photographersHeader = document.querySelector(".photographer-header");
 
   const photographerModel = photographerTemplate(photographer, photographerTotalLikes);
-  const userCardDOM = photographerModel.getLongUserCardDOM();
-  photographersHeader.appendChild(userCardDOM);
+  const photographerDetailsDOM = photographerModel.getPhotographerDetailsDOM();
+  photographersHeader.appendChild(photographerDetailsDOM);
 
   document.getElementById("modal-title").textContent += ` ${photographer.name}`;
 }

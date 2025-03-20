@@ -14,7 +14,7 @@ function showLightbox(media) {
 
 function displayLightBoxMedia(media) {
   const mediaModel = mediaFactory(media);
-  const fullMediaDOM = mediaModel.getFullMediaDOM();
+  const fullMediaDOM = mediaModel.getLightboxMediaDOM();
   const lightBoxMediaContainer = document.querySelector(".lightbox_media-container");
   lightBoxMediaContainer.textContent = "";
   lightBoxMediaContainer.appendChild(fullMediaDOM);

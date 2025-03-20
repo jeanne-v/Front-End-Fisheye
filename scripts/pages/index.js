@@ -3,8 +3,8 @@ function displayData(photographers) {
 
   photographers.forEach((photographer) => {
     const photographerModel = photographerTemplate(photographer);
-    const userCardDOM = photographerModel.getShortUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
+    const photographerCardDOM = photographerModel.getPhotographerCardDOM();
+    photographersSection.appendChild(photographerCardDOM);
   });
 }
 
