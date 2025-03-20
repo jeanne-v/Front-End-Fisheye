@@ -125,8 +125,8 @@ async function init() {
         "true" && !document.querySelector(".media-sort").contains(e.target))
     ) {
       closeDropDown();
-    } else if (e.target.classList.contains("media-sort__option")) {
-      moveFocusToOption(e.target);
+    } else if (e.target.closest(".media-sort__option")) {
+      moveFocusToOption(e.target.closest(".media-sort__option"));
       updateSelectedValue();
       closeDropDown();
       handleMediaSortValueChange();
