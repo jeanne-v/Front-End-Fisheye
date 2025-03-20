@@ -57,7 +57,7 @@ function sortMediaArray(mediaArray) {
     mediaArray.sort((a, b) => {
       const aTime = new Date(a.date).getTime();
       const bTime = new Date(b.date).getTime();
-      return aTime - bTime;
+      return bTime - aTime;
     });
   } else if (sortBy === "title") {
     mediaArray.sort((a, b) => {
