@@ -1,6 +1,5 @@
 const mediaSelect = document.querySelector(".media-sort");
 const selectTrigger = document.getElementById("media-sort-trigger");
-const optionsContainer = document.getElementById("media-sort-options");
 const options = Array.from(document.querySelectorAll(".media-sort__option"));
 
 let currentOptionIndex = 0;

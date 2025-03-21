@@ -121,8 +121,8 @@ async function init() {
         closeDropDown();
       }
     } else if (
-      (document.getElementById("media-sort-trigger").ariaExpanded =
-        "true" && !document.querySelector(".media-sort").contains(e.target))
+      document.getElementById("media-sort-trigger").ariaExpanded === "true" &&
+      !document.querySelector(".media-sort").contains(e.target)
     ) {
       closeDropDown();
     } else if (e.target.closest(".media-sort__option")) {
