@@ -11,10 +11,10 @@ function displayMedia(media) {
 async function getPhotographerMedia(photographerId) {
   const res = await fetch("./data/photographers.json");
   const data = await res.json();
-  const media = data.media.filter(
+  const photographerMedia = data.media.filter(
     (mediaItem) => mediaItem.photographerId === photographerId
   );
-  return media;
+  return photographerMedia;
 }
 
 function displayPhotographer(photographer, photographerTotalLikes) {
