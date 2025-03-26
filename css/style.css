@@ -169,6 +169,12 @@ main {
   cursor: pointer;
 }
 
+.contact_button:hover,
+.contact_button:focus {
+  background-color: #db8876;
+  color: #000000;
+}
+
 #main-wrapper.no-scroll {
   height: 100vh;
   overflow: hidden;
