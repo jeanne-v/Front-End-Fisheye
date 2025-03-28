@@ -219,6 +219,10 @@ main {
   border-radius: 5px;
 }
 
+.media-sort__trigger span {
+  background-color: #901c1c;
+}
+
 .media-sort--open .media-sort__trigger {
   border-radius: 5px 5px 0 0px;
 }
