@@ -102,6 +102,7 @@ function getImageHTMLEl(mediaData) {
   const el = document.createElement("img");
   el.classList.add("media-item_media", "media-item_media--image");
   el.src = `./assets/images/${mediaData.image}`;
+  el.alt = "";
   return el;
 }
 
